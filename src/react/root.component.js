@@ -14,7 +14,6 @@ export default class Root extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Mount");
     e.on("received", this.messageHandler);
   }
 
@@ -23,7 +22,6 @@ export default class Root extends React.Component {
   }
 
   messageHandler(message) {
-    console.log(message);
     this.setState({
       message: message.text
     });
@@ -31,12 +29,14 @@ export default class Root extends React.Component {
 
   sendMessage() {
     e.emit("message", { text: "Hello from React 👋" });
+    // event added from store
+    window.spa.counter.increaseCounter();
   }
 
   render() {
     return (
       <div style={{ marginTop: "10px" }}>
-        <h1>This was written in React</h1>
+        <h1>React Component.</h1>
 
         <p>
           <button onClick={this.sendMessage}>Send a message to Angular</button>
